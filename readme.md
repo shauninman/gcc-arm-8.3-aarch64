@@ -42,7 +42,7 @@ Building was a manual process because the blob and repo downloading kept timing 
 	git apply ../0001-abe-tmp-disable-retrieve.patch
 	
 	# this takes _ages_ but possibly worth it to never have to checkout linux again...
-	# the tar.xz ends up being ~7GB (I wonder if that has some build products in it...)
+	# snapshots.tar.xz ends up being ~7GB (I wonder if that has some build products in it?)
 	
 	# tar --xz -cvf snapshots.tar.xz snapshots/
 	# mv snapshots.tar.xz ~/workspace
