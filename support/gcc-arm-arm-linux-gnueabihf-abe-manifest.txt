@@ -1,0 +1,106 @@
+manifest_format=1.4
+
+# Component data for dejagnu
+dejagnu_url=http://git-us.linaro.org/git/toolchain
+dejagnu_branch=linaro-local/stable
+dejagnu_revision=21f2ff7c065d7ead6aec3e5ed528ecb0f9eadbac
+dejagnu_filespec=dejagnu.git
+dejagnu_mingw_only="no"
+dejagnu_staticlink="yes"
+
+# Component data for python
+python_url=http://snapshots.linaro.org/components/toolchain/infrastructure/
+python_filespec=python-2.7.4-mingw32.tar.xz
+python_md5sum=9b3092eff5508c4802936dfe4f5225ef
+python_mingw_only="yes"
+python_staticlink="yes"
+
+# Component data for gmp
+gmp_url=https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.03/src
+gmp_filespec=gmp.tar.xz
+gmp_mingw_only="no"
+gmp_configure="--enable-cxx --enable-fft"
+gmp_staticlink="yes"
+
+# Component data for mpfr
+mpfr_url=https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.03/src
+mpfr_filespec=mpfr.tar.xz
+mpfr_mingw_only="no"
+mpfr_configure="--with-gmp=${local_builds}/destdir/${host}"
+mpfr_staticlink="yes"
+
+# Component data for mpc
+mpc_url=https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.03/src
+mpc_filespec=mpc.tar.xz
+mpc_mingw_only="no"
+mpc_configure="--with-gmp=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host}"
+mpc_staticlink="yes"
+
+# Component data for expat
+expat_url=https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.03/src
+expat_filespec=libexpat.tar.xz
+expat_mingw_only="yes"
+expat_staticlink="yes"
+
+# Component data for libiconv
+libiconv_url=https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.03/src
+libiconv_filespec=libiconv.tar.xz
+libiconv_mingw_only="yes"
+libiconv_staticlink="yes"
+
+# Component data for gcc
+gcc_url=git://git-us.linaro.org/toolchain
+gcc_filespec=gcc.git
+gcc_revision=47335befa47297ab810945cece69c466417a95c1
+gcc_makeflags="MAKEINFOFLAGS=--force"
+gcc_mingw_only="no"
+gcc_configure=
+gcc_mingw_extraconf="--with-libiconv-prefix=${local_builds}/destdir/${host}/usr --with-system-zlib=no"
+gcc_staticlink="no"
+gcc_stage1_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --with-gnu-as --with-gnu-ld --disable-libmudflap --enable-lto --enable-shared --without-included-gettext --enable-nls --with-system-zlib --disable-sjlj-exceptions --enable-gnu-unique-object --enable-linker-build-id --disable-libstdcxx-pch --enable-c99 --enable-clocale=gnu --enable-libstdcxx-debug --enable-long-long --with-cloog=no --with-ppl=no --with-isl=no --disable-multilib --with-float=hard --with-fpu=neon-vfpv4 --with-mode=arm --with-tune=cortex-a7 --with-arch=armv7-a --enable-threads=posix --enable-multiarch --enable-libstdcxx-time=yes --enable-gnu-indirect-function --disable-libssp --disable-libquadmath --disable-threads --without-headers --with-newlib --disable-libmudflap --disable-bootstrap --disable-decimal-float --disable-libgomp --disable-libatomic --disable-libsanitizer --disable-plugins --disable-libitm --enable-languages=c --with-sysroot=${local_builds}/sysroot-arm-linux-gnueabihf --disable-shared --with-glibc-version=2.18"
+gcc_stage2_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --with-gnu-as --with-gnu-ld --disable-libmudflap --enable-lto --enable-shared --without-included-gettext --enable-nls --with-system-zlib --disable-sjlj-exceptions --enable-gnu-unique-object --enable-linker-build-id --disable-libstdcxx-pch --enable-c99 --enable-clocale=gnu --enable-libstdcxx-debug --enable-long-long --with-cloog=no --with-ppl=no --with-isl=no --disable-multilib --with-float=hard --with-fpu=neon-vfpv4 --with-mode=arm --with-tune=cortex-a7 --with-arch=armv7-a --enable-threads=posix --enable-multiarch --enable-libstdcxx-time=yes --enable-gnu-indirect-function --with-build-sysroot=${sysroots} --with-sysroot=${local_builds}/destdir/${host}/arm-linux-gnueabihf/libc --enable-checking=release --disable-bootstrap --enable-languages=c,c++,fortran,lto"
+
+# Component data for binutils
+binutils_url=git://sourceware.org/git
+binutils_filespec=binutils-gdb.git
+binutils_revision=0738b7acd30816902ccfbbb3eac16862f26985cb
+binutils_mingw_only="no"
+binutils_configure="--enable-lto --enable-plugins --enable-gold --disable-werror CPPFLAGS=-UFORTIFY_SOURCE --with-pkgversion=Linaro_Binutils-2019.02 --disable-gdb --disable-sim --disable-libdecnumber --disable-readline --with-sysroot=${sysroots}"
+binutils_staticlink="yes"
+
+# Component data for gdb
+gdb_url=git://sourceware.org/git
+gdb_filespec=binutils-gdb.git
+gdb_revision=07d117342c8d967b730a7193e2f879f22c60e88c
+gdb_mingw_only="no"
+gdb_configure="--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion=Linaro_GDB-2019.02 --disable-gas --disable-binutils --disable-ld --disable-gold --disable-gprof --with-python=yes"
+gdb_mingw_extraconf="--disable-tui --with-python=${local_snapshots}/python-2.7.4-mingw32 CFLAGS=-I${local_builds}/destdir/${host}/usr/include LDFLAGS=-L${local_builds}/destdir/${host}/usr/lib"
+gdb_staticlink="yes"
+
+# Component data for linux
+linux_url=git://git.kernel.org/pub/scm/linux/kernel/git/stable
+linux_filespec=linux-stable.git
+linux_revision=v4.19
+linux_md5sum=626292ab8b495e81efe6ee45baf6b817
+linux_mingw_only="no"
+linux_staticlink="yes"
+
+# Component data for glibc
+glibc_url=git://sourceware.org/git
+glibc_filespec=glibc.git
+glibc_revision=4aeff335ca19286ee2382d8eba794ae5fd49281a
+glibc_makeflags="PARALLELMFLAGS=-j32"
+glibc_mingw_only="no"
+glibc_configure="--disable-profile --without-gd --enable-obsolete-rpc --with-headers=${sysroots}/usr/include libc_cv_forced_unwind=yes libc_cv_c_cleanup=yes --without-selinux --disable-werror"
+
+# Component data for gdbserver
+gdbserver_url=git://sourceware.org/git
+gdbserver_filespec=binutils-gdb.git
+gdbserver_revision=07d117342c8d967b730a7193e2f879f22c60e88c
+gdbserver_mingw_only="no"
+gdbserver_configure="CPPFLAGS=--sysroot=${sysroots} CFLAGS=--sysroot=${sysroots} CXXFLAGS=--sysroot=${sysroots}"
+gdbserver_staticlink="yes"
+
+clibrary=glibc
+target=arm-linux-gnueabihf
+manifestid=e5f58f614c7a801ec8064a1e8ecccc4e
