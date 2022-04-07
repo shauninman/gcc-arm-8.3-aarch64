@@ -22,6 +22,13 @@ gmp_mingw_only="no"
 gmp_configure="--enable-cxx --enable-fft"
 gmp_staticlink="yes"
 
+# Component data for isl
+isl_url=https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.03/src
+isl_filespec=isl.tar.xz
+isl_mingw_only="no"
+isl_configure="--with-gmp-prefix=${local_builds}/destdir/${host}"
+isl_staticlink="yes"
+
 # Component data for mpfr
 mpfr_url=https://developer.arm.com/-/media/Files/downloads/gnu-a/8.3-2019.03/src
 mpfr_filespec=mpfr.tar.xz
@@ -57,8 +64,11 @@ gcc_mingw_only="no"
 gcc_configure=
 gcc_mingw_extraconf="--with-libiconv-prefix=${local_builds}/destdir/${host}/usr --with-system-zlib=no"
 gcc_staticlink="no"
-gcc_stage1_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --with-gnu-as --with-gnu-ld --disable-libmudflap --enable-lto --enable-shared --without-included-gettext --enable-nls --with-system-zlib --disable-sjlj-exceptions --enable-gnu-unique-object --enable-linker-build-id --disable-libstdcxx-pch --enable-c99 --enable-clocale=gnu --enable-libstdcxx-debug --enable-long-long --with-cloog=no --with-ppl=no --with-isl=no --disable-multilib --with-float=hard --with-fpu=neon-vfpv4 --with-mode=arm --with-tune=cortex-a7 --with-arch=armv7-a --enable-threads=posix --enable-multiarch --enable-libstdcxx-time=yes --enable-gnu-indirect-function --disable-libssp --disable-libquadmath --disable-threads --without-headers --with-newlib --disable-libmudflap --disable-bootstrap --disable-decimal-float --disable-libgomp --disable-libatomic --disable-libsanitizer --disable-plugins --disable-libitm --enable-languages=c --with-sysroot=${local_builds}/sysroot-arm-linux-gnueabihf --disable-shared --with-glibc-version=2.18"
-gcc_stage2_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --with-gnu-as --with-gnu-ld --disable-libmudflap --enable-lto --enable-shared --without-included-gettext --enable-nls --with-system-zlib --disable-sjlj-exceptions --enable-gnu-unique-object --enable-linker-build-id --disable-libstdcxx-pch --enable-c99 --enable-clocale=gnu --enable-libstdcxx-debug --enable-long-long --with-cloog=no --with-ppl=no --with-isl=no --disable-multilib --with-float=hard --with-fpu=neon-vfpv4 --with-mode=arm --with-tune=cortex-a7 --with-arch=armv7-a --enable-threads=posix --enable-multiarch --enable-libstdcxx-time=yes --enable-gnu-indirect-function --with-build-sysroot=${sysroots} --with-sysroot=${local_builds}/destdir/${host}/arm-linux-gnueabihf/libc --enable-checking=release --disable-bootstrap --enable-languages=c,c++,fortran,lto"
+gcc_stage1_flags="--disable-libatomic --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libsanitizer --disable-libssp --disable-shared --disable-threads --enable-checking=yes --enable-languages=c --with-arch=armv7-a --with-build-sysroot=${sysroots} --with-float=hard --with-fpu=neon --with-glibc-version=2.18 --with-gmp=${local_builds}/destdir/${host} --with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-newlib --with-sysroot=${local_builds}/sysroot-arm-linux-gnueabihf --with-tune=cortex-a7 --without-cloog --without-headers --without-isl"
+gcc_stage2_flags="--disable-libmudflap --disable-libssp --enable-checking=release --enable-gnu-indirect-function --enable-languages=c,c++,fortran --enable-shared --target=arm-linux-gnueabihf --with-arch=armv7-a --with-build-sysroot=${sysroots} --with-float=hard --with-fpu=neon --with-gmp=${local_builds}/destdir/${host} --with-isl=${local_builds}/destdir/${host} --with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-sysroot=${local_builds}/destdir/${host}/arm-linux-gnueabihf/libc"
+
+# this version of ABE doesn't like quptes in flags, eg.  --with-pkgversion='GNU Toolchain for the A-profile Architecture 8.3-2019.03 (I guess)'
+# tried escaping both single and double, tried patching lib/component.sh
 
 # Component data for binutils
 binutils_url=git://sourceware.org/git

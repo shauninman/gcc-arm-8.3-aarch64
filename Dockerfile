@@ -24,7 +24,6 @@ RUN apt-get -y update && apt-get -y install \
 	lsb-core \
 	make \
 	python2.7-dev \
-	qemu-user-static \
 	rsync \
 	scons \
 	texinfo \
